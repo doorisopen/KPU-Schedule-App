@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/kpu-schedule-app/static/css/main.d1b05096.chunk.css",
+    "main.js": "/kpu-schedule-app/static/js/main.b3bb5376.chunk.js",
+    "main.js.map": "/kpu-schedule-app/static/js/main.b3bb5376.chunk.js.map",
+    "runtime-main.js": "/kpu-schedule-app/static/js/runtime-main.07e9b993.js",
+    "runtime-main.js.map": "/kpu-schedule-app/static/js/runtime-main.07e9b993.js.map",
+    "static/js/2.59c396c4.chunk.js": "/kpu-schedule-app/static/js/2.59c396c4.chunk.js",
+    "static/js/2.59c396c4.chunk.js.map": "/kpu-schedule-app/static/js/2.59c396c4.chunk.js.map",
+    "index.html": "/kpu-schedule-app/index.html",
+    "precache-manifest.0dc76608039a6fe0ce7404180f4c9a07.js": "/kpu-schedule-app/precache-manifest.0dc76608039a6fe0ce7404180f4c9a07.js",
+    "service-worker.js": "/kpu-schedule-app/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/kpu-schedule-app/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.59c396c4.chunk.js.LICENSE": "/kpu-schedule-app/static/js/2.59c396c4.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.07e9b993.js",
+    "static/js/2.59c396c4.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.b3bb5376.chunk.js"
+  ]
+}
