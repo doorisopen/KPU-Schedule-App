@@ -98,7 +98,7 @@ header, footer {
 
 .lecture-contents{
   margin-bottom: 30px;
-  padding: 40px;
+  padding: 20px 40px 40px;
   border-bottom: 1px solid #09090d;
   background-color: #16171f;
 }
@@ -115,4 +115,10 @@ th {
   text-align: center;
   font-weight: bold;
   font-size: 14px;
+}
+
+.lecture-controller {
+  height: 60px;
+  margin-bottom: 10px;
+  background-color: #22232b;
 }

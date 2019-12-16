@@ -7,6 +7,8 @@ import './App.css';
 class App extends React.Component {
 
   state = {
+    url: "https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/",
+    gubun: "G.json",
     currentPage: 1,
     postsPerPage: 15,
     isLoading: true,
@@ -15,15 +17,19 @@ class App extends React.Component {
 
   // async: 이 함수가 비동기라는것을 말해주는것이고 await은 axios로 fetch 해온 data를 모두 로드 할때 까지 기다리라는 말임
   getLectures = async() => {
-    const { 
+    const { url, gubun } = this.state;
+    const {
       data : { 
         lectures 
       }
-    } = await axios.get(
-      "http://13.125.253.127:8080/kpu-schedule/lectureLoading/G"
-    );
+    /* AWS Server */ 
+    // http://13.125.253.127:8080/kpu-schedule/
+    // "https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/A.json"
+    } = await axios.get( url + gubun );
+
     console.log(lectures);
-    console.log(lectures.length);
+    console.log("gubun : ", gubun);
+    
     // state-> lectures:lectures <- axios에서 가져온 lectures임
     this.setState({ lectures, isLoading: false });
   };
@@ -56,6 +62,26 @@ class App extends React.Component {
               </div>
               ) : (
                 <div className="lecture-contents">
+                  <div className="lecture-controller">
+                    controller
+                    <div className="controller-item">학과
+                      <select>
+                        <option>컴퓨터공학부</option>
+                        <option>전자공학부</option>
+                        <option>기계공학부</option>
+                      </select>
+                    </div>
+                    <div className="controller-item">
+                      <a onClick={() => 
+                        this.componentDidMount(this.setState({ gubun: "A.json", isLoading: true}))  
+                        } href="#">학부(대학교)</a>
+                      <a onClick={() => (
+                        this.componentDidMount(this.setState({ gubun: "G.json", isLoading: true}))                 
+                      )} href="#">석사(대학원)</a>
+                    </div>
+                    
+                     
+                  </div>
                   <table>
                     <thead>
                       <tr>
