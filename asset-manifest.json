@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/kpu-schedule-app/static/css/main.a2dacdfa.chunk.css",
-    "main.js": "/kpu-schedule-app/static/js/main.1b7552ca.chunk.js",
-    "main.js.map": "/kpu-schedule-app/static/js/main.1b7552ca.chunk.js.map",
+    "main.js": "/kpu-schedule-app/static/js/main.eec27e54.chunk.js",
+    "main.js.map": "/kpu-schedule-app/static/js/main.eec27e54.chunk.js.map",
     "runtime-main.js": "/kpu-schedule-app/static/js/runtime-main.07e9b993.js",
     "runtime-main.js.map": "/kpu-schedule-app/static/js/runtime-main.07e9b993.js.map",
     "static/js/2.46633e42.chunk.js": "/kpu-schedule-app/static/js/2.46633e42.chunk.js",
     "static/js/2.46633e42.chunk.js.map": "/kpu-schedule-app/static/js/2.46633e42.chunk.js.map",
     "index.html": "/kpu-schedule-app/index.html",
-    "precache-manifest.1960bbf40e2b2e5fc45d00538a16faee.js": "/kpu-schedule-app/precache-manifest.1960bbf40e2b2e5fc45d00538a16faee.js",
+    "precache-manifest.6fbdc9b579684d39cd86ec10f469d775.js": "/kpu-schedule-app/precache-manifest.6fbdc9b579684d39cd86ec10f469d775.js",
     "service-worker.js": "/kpu-schedule-app/service-worker.js",
     "static/css/main.a2dacdfa.chunk.css.map": "/kpu-schedule-app/static/css/main.a2dacdfa.chunk.css.map",
     "static/js/2.46633e42.chunk.js.LICENSE": "/kpu-schedule-app/static/js/2.46633e42.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.07e9b993.js",
     "static/js/2.46633e42.chunk.js",
     "static/css/main.a2dacdfa.chunk.css",
-    "static/js/main.1b7552ca.chunk.js"
+    "static/js/main.eec27e54.chunk.js"
   ]
 }
