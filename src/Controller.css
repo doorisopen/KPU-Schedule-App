@@ -1,0 +1,17 @@
+
+
+
+
+.lecture-controller{
+    padding: 10px;
+}
+
+.controller-item {
+    margin: 10px 10px 0px 0px;
+    display: inline-block;
+}
+
+.controller-button {
+    margin: 0 10px 0px 0px;
+
+}

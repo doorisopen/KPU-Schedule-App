@@ -1,16 +1,23 @@
 import React from 'react';
 import axios from "axios";
 import Lecture from "./Lecture";
+import Major from "./Major";
 import Pagination from "./Pagination";
 import './App.css';
+import './Controller.css';
 
 class App extends React.Component {
 
   state = {
     url: "https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/",
-    gubun: "G.json",
+    gubun: "A.json",    // sch A, G
+    major: "all",
     currentPage: 1,
-    postsPerPage: 15,
+    postsPerPage: 15,   // post per 15
+    btn1Disabled: true,// button 1 enabled
+    btn2Disabled: false, // button 2 disabled
+    btn1Color: true,
+    btn2Color: false,
     isLoading: true,
     lectures: [],
   };
@@ -24,12 +31,9 @@ class App extends React.Component {
       }
     /* AWS Server */ 
     // http://13.125.253.127:8080/kpu-schedule/
-    // "https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/A.json"
+    //"https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/A.json"
     } = await axios.get( url + gubun );
-
-    // console.log(lectures);
-    // console.log("gubun : ", gubun);
-    
+    console.log(lectures);
     // state-> lectures:lectures <- axios에서 가져온 lectures임
     this.setState({ lectures, isLoading: false });
   };
@@ -38,20 +42,41 @@ class App extends React.Component {
   componentDidMount() {
     this.getLectures();
   }
-
-  componentDidUpdate() {
-    this.getLectures();
+  
+  // componentDidUpdate: setState가 되면 호출되는 life Cycle 제어문이 없으면 무한 루프돌 위험이있음
+  componentDidUpdate(prevState) {
+    if(this.state.isLoading) {
+      this.getLectures();
+    }
   }
-  render() {
-    const { currentPage, postsPerPage, isLoading, lectures } = this.state;
+  // Controller 대학, 대학원 disable, enable event
+  onChangeButton1(event) {
+    if (event.target.onclick) {
+      this.setState({ btn2Disabled: false, btn2Color: false});
+      this.setState({ btn1Disabled: true, btn1Color: true}); 
+    }
+  }
+  onChangeButton2(event) {
+    if (event.target.onclick) {
+      this.setState({ btn1Disabled: false, btn1Color: false});
+      this.setState({ btn2Disabled: true, btn2Color: true});
+    }
+  }
 
+  render() {
+    // Get state
+    const { currentPage, postsPerPage, isLoading, lectures } = this.state;
     // Get current lectures
     const indexOfLastLecture = currentPage * postsPerPage;
     const indexOfFirstLecture = indexOfLastLecture - postsPerPage;
     const currentLectures = lectures.slice(indexOfFirstLecture, indexOfLastLecture);
-
     // Change Page
     const paginate = (pageNumber) => this.setState({ currentPage: pageNumber });
+    // Chage btn Color
+    const btn1Selected = this.state.btn1Color ? "red" : "black";
+    const btn2Selected = this.state.btn2Color ? "red" : "black";
+    // Select Major
+    const major = (majorLectures) => this.setState({ lectures: majorLectures });
 
     return (
       <div className="lecture-page">
@@ -65,27 +90,36 @@ class App extends React.Component {
               </div>
               ) : (
                 <div className="lecture-contents">
+                  {/* {s} Controller */}
                   <div className="lecture-controller">
-                    controller
-                    <div className="controller-item">학과
-                      <select>
-                        <option>컴퓨터공학부</option>
-                        <option>전자공학부</option>
-                        <option>기계공학부</option>
-                      </select>
+                    <div className="controller-item">
+                      <Major 
+                        lectures={lectures}
+                        major={major}
+                      />
                     </div>
                     <div className="controller-item">
-                      <a onClick={() => {
+                      <button className="controller-button" onClick={event => {
                           this.setState({ lectures: [], currentPage: 1, gubun: "A.json", isLoading: true});
-                        }
-                        } href="#">학부(대학교)</a>
-                      <a onClick={() => {
+                          this.onChangeButton1(event);
+                        }}
+                        style={{color: btn1Selected}}
+                        disabled={this.state.btn1Disabled}
+                      >
+                          학부(대학교)
+                      </button>
+                      <button className="controller-button" onClick={event => {
                           this.setState({ lectures: [], currentPage: 1, gubun: "G.json", isLoading: true});
-                        }                 
-                      } href="#">석사(대학원)</a>
+                          this.onChangeButton2(event);
+                        }}
+                        style={{color: btn2Selected}}
+                        disabled={this.state.btn2Disabled}
+                      >
+                        석사(대학원)
+                      </button>
                     </div>
-
                   </div>
+                  {/* {e} Controller */}
                   <table>
                     <thead>
                       <tr>

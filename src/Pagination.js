@@ -15,25 +15,25 @@ const Pagination = ({ currentPage, postsPerPage, totalPosts, paginate }) => {
     <div className="pagination_box">
         <ul className="pagination">
             <li className="page-item">
-                <a onClick={() => {
+                <button onClick={() => {
                     if(currentPage === 1) return;
                     currentPage = currentPage - 1;
                     paginate(currentPage);
-                }} href="#" className="page-link">
+                }} className="page-btn">
                     이전페이지
-                </a>
+                </button>
             </li>
             <li className="page-item">
                 {currentPage}/{totalPage.length}
             </li>
             <li className="page-item">
-                <a onClick={() => {
+                <button onClick={() => {
                     if(currentPage === totalPage.length) return;
                     currentPage = currentPage + 1;
                     paginate(currentPage);
-                }} href="#" className="page-link">
+                }} className="page-btn">
                     다음페이지
-                </a>
+                </button>
             </li>
         </ul>
     </div>
