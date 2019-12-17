@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "97e36dab1c3d12c753de6582ffdcb3d3",
+    "revision": "a310a0d685a2f77419cd03b5ea417ad2",
     "url": "/kpu-schedule-app/index.html"
   },
   {
-    "revision": "0536e3ca2d2273c08efe",
-    "url": "/kpu-schedule-app/static/css/main.a2dacdfa.chunk.css"
+    "revision": "6020b8ed0e710d921c1a",
+    "url": "/kpu-schedule-app/static/css/main.9e91f57b.chunk.css"
   },
   {
     "revision": "87b3c09db0b7e16af59d",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/kpu-schedule-app/static/js/2.46633e42.chunk.js.LICENSE"
   },
   {
-    "revision": "0536e3ca2d2273c08efe",
-    "url": "/kpu-schedule-app/static/js/main.adc06133.chunk.js"
+    "revision": "6020b8ed0e710d921c1a",
+    "url": "/kpu-schedule-app/static/js/main.e9297df8.chunk.js"
   },
   {
     "revision": "0db8d9388cc6acefd5d8",
