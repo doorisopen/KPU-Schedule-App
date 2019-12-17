@@ -27,8 +27,8 @@ class App extends React.Component {
     // "https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/A.json"
     } = await axios.get( url + gubun );
 
-    console.log(lectures);
-    console.log("gubun : ", gubun);
+    // console.log(lectures);
+    // console.log("gubun : ", gubun);
     
     // state-> lectures:lectures <- axios에서 가져온 lectures임
     this.setState({ lectures, isLoading: false });
@@ -39,6 +39,9 @@ class App extends React.Component {
     this.getLectures();
   }
 
+  componentDidUpdate() {
+    this.getLectures();
+  }
   render() {
     const { currentPage, postsPerPage, isLoading, lectures } = this.state;
 
@@ -72,15 +75,16 @@ class App extends React.Component {
                       </select>
                     </div>
                     <div className="controller-item">
-                      <a onClick={() => 
-                        this.componentDidMount(this.setState({ gubun: "A.json", isLoading: true}))  
+                      <a onClick={() => {
+                          this.setState({ lectures: [], currentPage: 1, gubun: "A.json", isLoading: true});
+                        }
                         } href="#">학부(대학교)</a>
-                      <a onClick={() => (
-                        this.componentDidMount(this.setState({ gubun: "G.json", isLoading: true}))                 
-                      )} href="#">석사(대학원)</a>
+                      <a onClick={() => {
+                          this.setState({ lectures: [], currentPage: 1, gubun: "G.json", isLoading: true});
+                        }                 
+                      } href="#">석사(대학원)</a>
                     </div>
-                    
-                     
+
                   </div>
                   <table>
                     <thead>
@@ -112,6 +116,7 @@ class App extends React.Component {
                     </tbody>
                   </table>
                   <Pagination 
+                    currentPage={currentPage}
                     postsPerPage={postsPerPage} 
                     totalPosts={lectures.length} 
                     paginate={paginate} />
