@@ -1,8 +1,16 @@
 import React from "react";
 
 
-const Major = ({ lectures, major }) => {
+const Major = ({ lectures, changeMajor }) => {
     const majors = [
+        {
+            majorName: "전공을 선택하세요",
+            majorCode: "",
+        },
+        {
+            majorName: "전체",
+            majorCode: "",
+        },
         {
             majorName: "컴퓨터공학부",
             majorCode: "ACS",
@@ -44,16 +52,19 @@ const Major = ({ lectures, major }) => {
             majorCode: "AAK", /// AAJ(현장)
         }
     ];
-    const majorLectures = [];
-    lectures.map(lecture => {
-        if(lecture.lectureCode.includes("AAK")) {
-            majorLectures.push(lecture);
-        }
-    });
-    console.log(majorLectures);
-    
+
+    // const majorLectures = [];
+    // lectures.map(lecture => {
+    //     if(lecture.lectureCode.includes("AAK")) {
+    //         majorLectures.push(lecture);
+    //     }
+    // });
+    // console.log(majorLectures);
+
     return (
-        <select>
+        <select onChange={(event) => {
+                changeMajor(event.target.value);
+            }}>
             {majors.map(major => (
                 <option key={major.majorCode} value={major.majorCode}>
                     {major.majorName}

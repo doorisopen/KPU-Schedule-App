@@ -11,7 +11,7 @@ class App extends React.Component {
   state = {
     url: "https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/",
     gubun: "A.json",    // sch A, G
-    major: "all",
+    currentMajor: "ALL",
     currentPage: 1,
     postsPerPage: 15,   // post per 15
     btn1Disabled: true,// button 1 enabled
@@ -19,7 +19,9 @@ class App extends React.Component {
     btn1Color: true,
     btn2Color: false,
     isLoading: true,
+    majorLectureLoading: false,
     lectures: [],
+    lecturesSave: [],
   };
 
   // async: 이 함수가 비동기라는것을 말해주는것이고 await은 axios로 fetch 해온 data를 모두 로드 할때 까지 기다리라는 말임
@@ -33,9 +35,27 @@ class App extends React.Component {
     // http://13.125.253.127:8080/kpu-schedule/
     //"https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/A.json"
     } = await axios.get( url + gubun );
-    console.log(lectures);
+    
     // state-> lectures:lectures <- axios에서 가져온 lectures임
-    this.setState({ lectures, isLoading: false });
+    this.setState({ lectures, lecturesSave: lectures, isLoading: false });
+  };
+
+  getMajorLectures = async() => {
+    const majorLectures = [];
+    const { currentMajor, lectures } = this.state;
+    
+    lectures.map(lecture => {
+      if(lecture.lectureCode.includes(currentMajor)) {
+          majorLectures.push(lecture);
+      }
+    });
+    // for(let i = 0; i < lectures.length; i++) {
+    //   if(lectures.lectureCode.includes(currentMajor)) {
+    //     majorLectures.push(lectures);
+    //   }
+    // }
+    this.setState({ lectures: majorLectures, isLoading: false, majorLectureLoading: false});
+
   };
 
   // componentDidMount: component가 생성되고 호출되는 life Cycle
@@ -44,11 +64,15 @@ class App extends React.Component {
   }
   
   // componentDidUpdate: setState가 되면 호출되는 life Cycle 제어문이 없으면 무한 루프돌 위험이있음
-  componentDidUpdate(prevState) {
-    if(this.state.isLoading) {
+  componentDidUpdate() {
+    if(this.state.isLoading && !this.state.majorLectureLoading) {
       this.getLectures();
     }
+    if(this.state.isLoading && this.state.majorLectureLoading) {
+      this.getMajorLectures();
+    }
   }
+
   // Controller 대학, 대학원 disable, enable event
   onChangeButton1(event) {
     if (event.target.onclick) {
@@ -62,10 +86,11 @@ class App extends React.Component {
       this.setState({ btn2Disabled: true, btn2Color: true});
     }
   }
+  
 
   render() {
     // Get state
-    const { currentPage, postsPerPage, isLoading, lectures } = this.state;
+    const { currentPage, postsPerPage, isLoading, lectures, lecturesSave, currentMajor } = this.state;
     // Get current lectures
     const indexOfLastLecture = currentPage * postsPerPage;
     const indexOfFirstLecture = indexOfLastLecture - postsPerPage;
@@ -75,8 +100,11 @@ class App extends React.Component {
     // Chage btn Color
     const btn1Selected = this.state.btn1Color ? "red" : "black";
     const btn2Selected = this.state.btn2Color ? "red" : "black";
-    // Select Major
-    const major = (majorLectures) => this.setState({ lectures: majorLectures });
+    // Change Major
+    const changeMajor = (majorCode) => {
+      this.setState({ lectures: lecturesSave, currentMajor: majorCode, currentPage: 1, isLoading: true, majorLectureLoading: true});
+      console.log("change Major -->"+currentMajor);
+    }
 
     return (
       <div className="lecture-page">
@@ -95,7 +123,7 @@ class App extends React.Component {
                     <div className="controller-item">
                       <Major 
                         lectures={lectures}
-                        major={major}
+                        changeMajor={changeMajor}
                       />
                     </div>
                     <div className="controller-item">
