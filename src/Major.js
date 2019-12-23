@@ -66,7 +66,7 @@ const Major = ({ lectures, changeMajor }) => {
                 changeMajor(event.target.value);
             }}>
             {majors.map(major => (
-                <option key={major.majorCode} value={major.majorCode}>
+                <option key={major.majorName} value={major.majorCode}>
                     {major.majorName}
                 </option>
             ))}

@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Lecture.css";
 
+function lectureAdd(lectureName) {
+    // const lecture = [];
+    console.log(lectureName.lectureName+" Add");
+}
 
 function Lecture({lectureIdx,
      lectureName,
@@ -18,7 +22,7 @@ function Lecture({lectureIdx,
             <td>{lectureSemester}</td>
             <td>{lectureDate}</td>
             <td>{professorName}</td>
-            <td>과목 선택</td>
+            <td><button onClick={event => {lectureAdd({lectureName});}}>과목선택</button></td>
         </tr>
     );
 }
