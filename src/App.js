@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from "axios";
 import Lecture from "./Lecture";
+import LectureAddTemplate from "./LectureAdd/LectureAddTemplate";
+import LectureList from "./LectureAdd/LectureList";
 import Major from "./Major";
 import Pagination from "./Pagination";
 import './App.css';
@@ -22,6 +24,24 @@ class App extends React.Component {
     majorLectureLoading: false,
     lectures: [],
     lecturesSave: [],
+    lectureItems: [
+      { 
+        lectureIdx: 'a',
+        lectureName:'a',
+        lectureSemester:'a',
+        lectureDate:'a',
+        professorName:'a',
+        lectureCode:'a',
+      },
+      { 
+        lectureIdx: 'b',
+        lectureName:'b',
+        lectureSemester:'b',
+        lectureDate:'b',
+        professorName:'b',
+        lectureCode:'b',
+      },
+    ]
   };
 
   // async: 이 함수가 비동기라는것을 말해주는것이고 await은 axios로 fetch 해온 data를 모두 로드 할때 까지 기다리라는 말임
@@ -90,7 +110,7 @@ class App extends React.Component {
 
   render() {
     // Get state
-    const { currentPage, postsPerPage, isLoading, lectures, lecturesSave, currentMajor } = this.state;
+    const { currentPage, postsPerPage, isLoading, lectures, lecturesSave, currentMajor, lectureItems } = this.state;
     // Get current lectures
     const indexOfLastLecture = currentPage * postsPerPage;
     const indexOfFirstLecture = indexOfLastLecture - postsPerPage;
@@ -105,7 +125,9 @@ class App extends React.Component {
       this.setState({ lectures: lecturesSave, currentMajor: majorCode, currentPage: 1, isLoading: true, majorLectureLoading: true});
       console.log("change Major -->"+currentMajor);
     }
-
+    // Lecture Add
+    // const lectureAdd = (lectureItems) => { this.setState({lectureItems: lectureItems}); }
+    
     return (
       <div className="lecture-page">
         <header className="lecture-page-header">
@@ -184,6 +206,13 @@ class App extends React.Component {
                     paginate={paginate} />
                 </div>
               )}
+              <div className="lecture-contents">
+                <LectureAddTemplate>
+                  <LectureList
+                    lectureItems = {lectureItems}
+                  />
+                </LectureAddTemplate>
+              </div>
           </section>
         <footer className="lecture-page-footer">
           github. https://github.com/doorisopen

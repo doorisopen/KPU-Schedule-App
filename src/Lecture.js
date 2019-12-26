@@ -1,19 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
+import LectureAddButton from "./LectureAdd/LectureAddButton";
 import "./Lecture.css";
 
-function lectureAdd(lectureName) {
-    // const lecture = [];
-    console.log(lectureName.lectureName+" Add");
-}
-
-function Lecture({lectureIdx,
+function Lecture({
+     lectureIdx,
      lectureName,
      lectureSemester,
      lectureDate,
      professorName,
      lectureCode
     }) {
+    
+    const lectureItem = {
+    Item: {
+        lectureIdx: lectureIdx,
+        lectureName: lectureName,
+        lectureSemester: lectureSemester,
+        lectureDate: lectureDate,
+        professorName: professorName,
+        lectureCode: lectureCode
+    }};
+
     return (
         <tr className="lecture">
             <td>{lectureIdx}</td>
@@ -22,7 +30,11 @@ function Lecture({lectureIdx,
             <td>{lectureSemester}</td>
             <td>{lectureDate}</td>
             <td>{professorName}</td>
-            <td><button onClick={event => {lectureAdd({lectureName});}}>과목선택</button></td>
+            <td>
+                <LectureAddButton
+                 lectureItem={lectureItem}
+                />
+            </td>
         </tr>
     );
 }
