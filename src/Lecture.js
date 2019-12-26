@@ -9,7 +9,9 @@ function Lecture({
      lectureSemester,
      lectureDate,
      professorName,
-     lectureCode
+     lectureCode,
+     lectureAdd,
+     currentLectures
     }) {
     
     const lectureItem = {
@@ -19,21 +21,25 @@ function Lecture({
         lectureSemester: lectureSemester,
         lectureDate: lectureDate,
         professorName: professorName,
-        lectureCode: lectureCode
+        lectureCode: lectureCode,
+        selected: false
     }};
 
     return (
         <tr className="lecture">
-            <td>{lectureIdx}</td>
-            <td>{lectureCode}</td>
-            <td>{lectureName}</td>
-            <td>{lectureSemester}</td>
-            <td>{lectureDate}</td>
-            <td>{professorName}</td>
+            <td>{lectureItem.Item.lectureIdx}</td>
+            <td>{lectureItem.Item.lectureCode}</td>
+            <td>{lectureItem.Item.lectureName}</td>
+            <td>{lectureItem.Item.lectureSemester}</td>
+            <td>{lectureItem.Item.lectureDate}</td>
+            <td>{lectureItem.Item.professorName}</td>
             <td>
-                <LectureAddButton
-                 lectureItem={lectureItem}
-                />
+            <LectureAddButton
+                key={lectureItem.Item.lectureIdx}
+                lectureItem={lectureItem}
+                lectureAdd={lectureAdd}
+                currentLectures={currentLectures}
+            />
             </td>
         </tr>
     );

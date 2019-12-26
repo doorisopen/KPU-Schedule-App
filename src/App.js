@@ -19,29 +19,14 @@ class App extends React.Component {
     btn1Disabled: true,// button 1 enabled
     btn2Disabled: false, // button 2 disabled
     btn1Color: true,
-    btn2Color: false,
-    isLoading: true,
-    majorLectureLoading: false,
-    lectures: [],
-    lecturesSave: [],
-    lectureItems: [
-      { 
-        lectureIdx: 'a',
-        lectureName:'a',
-        lectureSemester:'a',
-        lectureDate:'a',
-        professorName:'a',
-        lectureCode:'a',
-      },
-      { 
-        lectureIdx: 'b',
-        lectureName:'b',
-        lectureSemester:'b',
-        lectureDate:'b',
-        professorName:'b',
-        lectureCode:'b',
-      },
-    ]
+    btn2Color: false, 
+    isLoading: true, // 데이터 로딩
+    majorLectureLoading: false, // 전공 데이터 로딩
+    isItemAdd: false,
+    lectures: [], // 전공 별 데이터 (변동)
+    lecturesSave: [], // 초기 전체 데이터 (고정)
+    lectureItems: [], // 강의 추가 데이터 (변동)
+    test: []
   };
 
   // async: 이 함수가 비동기라는것을 말해주는것이고 await은 axios로 fetch 해온 data를 모두 로드 할때 까지 기다리라는 말임
@@ -55,7 +40,7 @@ class App extends React.Component {
     // http://13.125.253.127:8080/kpu-schedule/
     //"https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/A.json"
     } = await axios.get( url + gubun );
-    
+
     // state-> lectures:lectures <- axios에서 가져온 lectures임
     this.setState({ lectures, lecturesSave: lectures, isLoading: false });
   };
@@ -64,16 +49,12 @@ class App extends React.Component {
     const majorLectures = [];
     const { currentMajor, lectures } = this.state;
     
-    lectures.map(lecture => {
+    lectures.forEach(lecture => {
       if(lecture.lectureCode.includes(currentMajor)) {
           majorLectures.push(lecture);
       }
     });
-    // for(let i = 0; i < lectures.length; i++) {
-    //   if(lectures.lectureCode.includes(currentMajor)) {
-    //     majorLectures.push(lectures);
-    //   }
-    // }
+    
     this.setState({ lectures: majorLectures, isLoading: false, majorLectureLoading: false});
 
   };
@@ -110,24 +91,65 @@ class App extends React.Component {
 
   render() {
     // Get state
-    const { currentPage, postsPerPage, isLoading, lectures, lecturesSave, currentMajor, lectureItems } = this.state;
+    const { 
+      currentPage, 
+      postsPerPage, 
+      isLoading, 
+      lectures, 
+      lecturesSave, 
+      currentMajor, 
+      lectureItems,
+      isItemAdd 
+    } = this.state;
+
     // Get current lectures
     const indexOfLastLecture = currentPage * postsPerPage;
     const indexOfFirstLecture = indexOfLastLecture - postsPerPage;
     const currentLectures = lectures.slice(indexOfFirstLecture, indexOfLastLecture);
+
     // Change Page
     const paginate = (pageNumber) => this.setState({ currentPage: pageNumber });
     // Chage btn Color
     const btn1Selected = this.state.btn1Color ? "red" : "black";
     const btn2Selected = this.state.btn2Color ? "red" : "black";
+    
     // Change Major
     const changeMajor = (majorCode) => {
       this.setState({ lectures: lecturesSave, currentMajor: majorCode, currentPage: 1, isLoading: true, majorLectureLoading: true});
       console.log("change Major -->"+currentMajor);
     }
     // Lecture Add
-    // const lectureAdd = (lectureItems) => { this.setState({lectureItems: lectureItems}); }
-    
+    const lectureAdd = (lectureAddItems) => {
+      // // 선택된 강의가 몇번째 index인지 찾는다.
+      // const index = lectures.findIndex(lecture => lecture.lectureIdx === lectureAddItems.Item.lectureIdx);
+      // // 선택된 객체
+      // const selectedLecture = lectures[index]; 
+      // // 배열 복사
+      // const unSelectedLectures = [...lectures];
+      // unSelectedLectures[index] = {
+      //   ...selectedLecture,
+      //   selected: !selectedLecture.Item.selected
+      // };
+
+      // console.log("Selected ->"+lectureAddItems.Item.selected);
+      this.setState({
+        // lectures: unSelectedLectures,
+        lectureItems: lectureItems.concat(lectureAddItems)
+      });
+    }
+    // lecture Remove
+    const lectureRemove = (lectureIdx) => {
+      const { lectureItems } = this.state;
+      this.setState({ 
+        lectureItems: lectureItems.filter(lectureItem => lectureItem.Item.lectureIdx !== lectureIdx)
+      });
+    }
+
+    // CONSOL LOG
+
+
+    // /. CONSOL LOG
+
     return (
       <div className="lecture-page">
         <header className="lecture-page-header">
@@ -149,7 +171,7 @@ class App extends React.Component {
                       />
                     </div>
                     <div className="controller-item">
-                      <button className="controller-button" onClick={event => {
+                      <button className="controller-button" onClick={(event) => {
                           this.setState({ lectures: [], currentPage: 1, gubun: "A.json", isLoading: true});
                           this.onChangeButton1(event);
                         }}
@@ -158,7 +180,7 @@ class App extends React.Component {
                       >
                           학부(대학교)
                       </button>
-                      <button className="controller-button" onClick={event => {
+                      <button className="controller-button" onClick={(event) => {
                           this.setState({ lectures: [], currentPage: 1, gubun: "G.json", isLoading: true});
                           this.onChangeButton2(event);
                         }}
@@ -195,6 +217,8 @@ class App extends React.Component {
                           lectureDate={lecture.lectureDate}
                           professorName={lecture.professorName}
                           lectureCode={lecture.lectureCode}
+                          lectureAdd={lectureAdd}
+                          currentLectures={currentLectures}
                         />
                       ))}
                     </tbody>
@@ -205,11 +229,14 @@ class App extends React.Component {
                     totalPosts={lectures.length} 
                     paginate={paginate} />
                 </div>
-              )}
+            )}
               <div className="lecture-contents">
                 <LectureAddTemplate>
                   <LectureList
+                    key = {lectureItems}
                     lectureItems = {lectureItems}
+                    isItemAdd = {isItemAdd}
+                    lectureRemove = {lectureRemove}
                   />
                 </LectureAddTemplate>
               </div>

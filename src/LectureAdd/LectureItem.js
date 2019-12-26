@@ -1,14 +1,18 @@
 import React , { Component } from "react";
+import LectureRemoveButton from "./LectureRemoveButton";
 import "../Lecture.css";
 
 class LectureItem extends Component {
     render() {
-        const {lectureIdx,
+        const {
+            lectureIdx,
             lectureName,
             lectureSemester,
             lectureDate,
             professorName,
-            lectureCode} = this.props;
+            lectureCode,
+            lectureRemove
+        } = this.props;
 
         return (
             <tr className="lecture">
@@ -18,6 +22,12 @@ class LectureItem extends Component {
                 <td>{lectureSemester}</td>
                 <td>{lectureDate}</td>
                 <td>{professorName}</td>
+                <td>
+                <LectureRemoveButton 
+                    lectureIdx={lectureIdx}
+                    lectureRemove={lectureRemove}
+                />
+                </td>
             </tr>
         );
     }
