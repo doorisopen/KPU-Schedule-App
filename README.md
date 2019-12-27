@@ -6,5 +6,5 @@
 * [x] Data Pagination
 * [x] School Select
 * [x] Major Select
-* [ ] Lecture Add
+* [x] Lecture Add
 * [ ] Make Time Table

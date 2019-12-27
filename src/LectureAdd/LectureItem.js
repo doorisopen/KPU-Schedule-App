@@ -11,7 +11,8 @@ class LectureItem extends Component {
             lectureDate,
             professorName,
             lectureCode,
-            lectureRemove
+            lectureRemove,
+            currentLectures
         } = this.props;
 
         return (
@@ -26,6 +27,7 @@ class LectureItem extends Component {
                 <LectureRemoveButton 
                     lectureIdx={lectureIdx}
                     lectureRemove={lectureRemove}
+                    currentLectures={currentLectures}
                 />
                 </td>
             </tr>

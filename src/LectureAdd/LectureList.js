@@ -4,7 +4,7 @@ import LectureItem from "./LectureItem";
 class LectureList extends Component {
 
     render() {
-        const { lectureItems, isItemAdd, lectureRemove } = this.props;
+        const { lectureItems, isItemAdd, lectureRemove, currentLectures } = this.props;
 
         return (
             lectureItems.map(lecture => (
@@ -18,6 +18,7 @@ class LectureList extends Component {
                 lectureCode={lecture.Item.lectureCode}
                 lectureRemove={lectureRemove}
                 isItemAdd={isItemAdd}
+                currentLectures={currentLectures}
             />
             ))
         );

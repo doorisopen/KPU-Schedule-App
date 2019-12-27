@@ -22,16 +22,15 @@ class App extends React.Component {
     btn2Color: false, 
     isLoading: true, // 데이터 로딩
     majorLectureLoading: false, // 전공 데이터 로딩
-    isItemAdd: false,
-    lectures: [], // 전공 별 데이터 (변동)
-    lecturesSave: [], // 초기 전체 데이터 (고정)
-    lectureItems: [], // 강의 추가 데이터 (변동)
-    test: []
+    lectures: [],       // 전공 별 데이터 (변동)
+    lecturesSave: [],   // 초기 전체 데이터 (고정)
+    lectureItems: []    // 강의 추가 데이터 (변동)
   };
 
   // async: 이 함수가 비동기라는것을 말해주는것이고 await은 axios로 fetch 해온 data를 모두 로드 할때 까지 기다리라는 말임
   getLectures = async() => {
     const { url, gubun } = this.state;
+    const settingData = [];
     const {
       data : { 
         lectures 
@@ -41,8 +40,13 @@ class App extends React.Component {
     //"https://raw.githubusercontent.com/doorisopen/kpu-schedule-app/master/data/A.json"
     } = await axios.get( url + gubun );
 
+    // 배열 요소(selected: false) 추가 한다.
+    lectures.forEach(lecture => {
+      settingData.push({...lecture, selected: false});
+    });
+
     // state-> lectures:lectures <- axios에서 가져온 lectures임
-    this.setState({ lectures, lecturesSave: lectures, isLoading: false });
+    this.setState({ lectures: settingData, lecturesSave: settingData, isLoading: false });
   };
 
   getMajorLectures = async() => {
@@ -98,8 +102,7 @@ class App extends React.Component {
       lectures, 
       lecturesSave, 
       currentMajor, 
-      lectureItems,
-      isItemAdd 
+      lectureItems
     } = this.state;
 
     // Get current lectures
@@ -118,25 +121,15 @@ class App extends React.Component {
       this.setState({ lectures: lecturesSave, currentMajor: majorCode, currentPage: 1, isLoading: true, majorLectureLoading: true});
       console.log("change Major -->"+currentMajor);
     }
+    
     // Lecture Add
     const lectureAdd = (lectureAddItems) => {
-      // // 선택된 강의가 몇번째 index인지 찾는다.
-      // const index = lectures.findIndex(lecture => lecture.lectureIdx === lectureAddItems.Item.lectureIdx);
-      // // 선택된 객체
-      // const selectedLecture = lectures[index]; 
-      // // 배열 복사
-      // const unSelectedLectures = [...lectures];
-      // unSelectedLectures[index] = {
-      //   ...selectedLecture,
-      //   selected: !selectedLecture.Item.selected
-      // };
-
-      // console.log("Selected ->"+lectureAddItems.Item.selected);
       this.setState({
         // lectures: unSelectedLectures,
         lectureItems: lectureItems.concat(lectureAddItems)
       });
     }
+
     // lecture Remove
     const lectureRemove = (lectureIdx) => {
       const { lectureItems } = this.state;
@@ -144,11 +137,7 @@ class App extends React.Component {
         lectureItems: lectureItems.filter(lectureItem => lectureItem.Item.lectureIdx !== lectureIdx)
       });
     }
-
-    // CONSOL LOG
-
-
-    // /. CONSOL LOG
+    
 
     return (
       <div className="lecture-page">
@@ -217,6 +206,7 @@ class App extends React.Component {
                           lectureDate={lecture.lectureDate}
                           professorName={lecture.professorName}
                           lectureCode={lecture.lectureCode}
+                          selected={lecture.selected}
                           lectureAdd={lectureAdd}
                           currentLectures={currentLectures}
                         />
@@ -235,8 +225,8 @@ class App extends React.Component {
                   <LectureList
                     key = {lectureItems}
                     lectureItems = {lectureItems}
-                    isItemAdd = {isItemAdd}
                     lectureRemove = {lectureRemove}
+                    currentLectures={currentLectures}
                   />
                 </LectureAddTemplate>
               </div>

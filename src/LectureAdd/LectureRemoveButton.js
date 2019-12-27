@@ -1,10 +1,13 @@
 import React from "react";
 
-const LectureRemoveButton = ({lectureIdx, lectureRemove}) => {
+const LectureRemoveButton = ({currentLectures, lectureIdx, lectureRemove}) => {
+    
     return (
         <button onClick={(event) => {
-            console.log(lectureIdx +" Remove Complete!!");
-            event.stopPropagation();
+            const index = currentLectures.findIndex(lecture => 
+                lecture.lectureIdx === lectureIdx);
+            currentLectures[index].selected = false;
+
             lectureRemove(lectureIdx);
         }}
         >&times;</button>
