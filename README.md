@@ -8,3 +8,5 @@
 * [x] Major Select
 * [x] Lecture Add
 * [ ] Make Time Table
+* [ ] Search Lecture
+* [ ] Number of Schedule Cases
