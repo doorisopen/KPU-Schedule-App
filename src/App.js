@@ -3,10 +3,12 @@ import axios from "axios";
 import Lecture from "./Lecture";
 import LectureAddTemplate from "./LectureAdd/LectureAddTemplate";
 import LectureList from "./LectureAdd/LectureList";
+import TimeTableTemplate from "./TimeTable/TimeTableTemplate";
 import Major from "./Major";
 import Pagination from "./Pagination";
 import './App.css';
 import './Controller.css';
+
 
 class App extends React.Component {
 
@@ -121,7 +123,7 @@ class App extends React.Component {
       this.setState({ lectures: lecturesSave, currentMajor: majorCode, currentPage: 1, isLoading: true, majorLectureLoading: true});
       console.log("change Major -->"+currentMajor);
     }
-    
+
     // Lecture Add
     const lectureAdd = (lectureAddItems) => {
       this.setState({
@@ -229,6 +231,14 @@ class App extends React.Component {
                     currentLectures={currentLectures}
                   />
                 </LectureAddTemplate>
+                <div>
+                  <button>
+                    시간표 만들기
+                  </button>
+                </div>
+              </div>
+              <div className="lecture-contents">
+                {/* <TimeTableTemplate></TimeTableTemplate> */}
               </div>
           </section>
         <footer className="lecture-page-footer">
