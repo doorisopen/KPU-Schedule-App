@@ -122,3 +122,15 @@ th {
   margin-bottom: 10px;
   background-color: #22232b;
 }
+
+.timeTable-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  padding: 20px 40px 40px;
+  border-bottom: 1px solid #09090d;
+  background-color: #fff;
+}
+.timeTable-contents {
+  margin: 0 auto;
+}
