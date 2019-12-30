@@ -232,15 +232,18 @@ class App extends React.Component {
                   />
                 </LectureAddTemplate>
                 <div>
-                  <button>
-                    시간표 만들기
+                  <button onClick={(event) => {
+                    console.log("Make Schedule -->" + JSON.stringify(lectureItems) + " Count -->"+lectureItems.length);
+                  }}
+                  >
+                  시간표 만들기
                   </button>
                 </div>
               </div>
               <div className="timeTable-container">
-                <TimeTableTemplate>
+                {/* <TimeTableTemplate>
 
-                </TimeTableTemplate>
+                </TimeTableTemplate> */}
               </div>
           </section>
         <footer className="lecture-page-footer">

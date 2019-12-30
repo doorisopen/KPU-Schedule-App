@@ -141,8 +141,7 @@ export default class TimeTableTemplate extends React.PureComponent {
           <Scheduler
             data={data}
             height={600}
-            startDayHour={9}
-            endDayHour={18}
+            
           >
             
             <ViewState
@@ -150,7 +149,8 @@ export default class TimeTableTemplate extends React.PureComponent {
             />
 
             <WeekView
-              renderDateCell={renderDateCell}
+              startDayHour={9}
+              endDayHour={18}
             />
 
             <Appointments />

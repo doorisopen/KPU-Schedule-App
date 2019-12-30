@@ -32,12 +32,12 @@ class Lecture extends Component {
 
     return (
         <tr className="lecture">
-            <td>{lectureItem.Item.lectureIdx}</td>
-            <td>{lectureItem.Item.lectureCode}</td>
-            <td>{lectureItem.Item.lectureName}</td>
-            <td>{lectureItem.Item.lectureSemester}</td>
-            <td>{lectureItem.Item.lectureDate}</td>
-            <td>{lectureItem.Item.professorName}</td>
+            <td>{lectureIdx}</td>
+            <td>{lectureCode}</td>
+            <td>{lectureName}</td>
+            <td>{lectureSemester}</td>
+            <td>{lectureDate}</td>
+            <td>{professorName}</td>
             <td>
             <LectureAddButton
                 currentLectures={currentLectures} // 전체 데이터

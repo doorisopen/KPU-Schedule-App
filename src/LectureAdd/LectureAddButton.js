@@ -8,7 +8,7 @@ const LectureAddButton = ({currentLectures, lectureItem, lectureAdd}) => {
             const index = currentLectures.findIndex(lecture => 
                 lecture.lectureIdx === lectureItem.Item.lectureIdx);
             currentLectures[index].selected = true;
-
+            lectureItem.Item.selected = true;
             // lectureItem 추가 및 배열 갱신
             lectureAdd(lectureItem);
         }}
