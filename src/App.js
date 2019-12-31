@@ -241,9 +241,9 @@ class App extends React.Component {
                 </div>
               </div>
               <div className="timeTable-container">
-                {/* <TimeTableTemplate>
+                <TimeTableTemplate>
 
-                </TimeTableTemplate> */}
+                </TimeTableTemplate>
               </div>
           </section>
         <footer className="lecture-page-footer">

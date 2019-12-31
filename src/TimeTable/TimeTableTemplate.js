@@ -8,12 +8,9 @@ import {
   Appointments,
   AppointmentTooltip,
 } from '@devexpress/dx-react-scheduler-material-ui';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core/styles';
 import '../App.css';
 
-const dayOfWeekNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const dayOfWeekNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 const appointments = [{
   title: 'Website Re-Design Plan',
   startDate: new Date(2018, 5, 25, 12, 35),
@@ -23,8 +20,8 @@ const appointments = [{
   location: 'Room 1',
 }, {
   title: 'Book Flights to San Fran for Sales Trip',
-  startDate: new Date(2018, 5, 26, 12, 35),
-  endDate: new Date(2018, 5, 26, 15, 0),
+  startDate: new Date(2018, 5, 26, 9, 35),
+  endDate: new Date(2018, 5, 26, 10, 35),
   id: 1,
   members: [2, 4],
   location: 'Room 2',
@@ -49,41 +46,14 @@ const appointments = [{
   id: 4,
   members: [5, 1, 3],
   location: 'Room 5',
+}, {
+  title: 'Hello React App',
+  startDate: new Date(2018, 5, 30, 12, 35),
+  endDate: new Date(2018, 5, 30, 15, 0),
+  id: 5,
+  members: [4, 1],
+  location: 'Room 1',
 }];
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    marginBottom: theme.spacing(2),
-    justifyContent: 'flex-end',
-  },
-  text: {
-    ...theme.typography.h6,
-    marginRight: theme.spacing(2),
-  },
-});
-
-const ResourceSwitcher = withStyles(styles, { name: 'ResourceSwitcher' })(
-  ({
-    mainResourceName, onChange, classes, resources,
-  }) => (
-    <div className={classes.container}>
-      <div className={classes.text}>
-        Main resource name:
-      </div>
-      <Select
-        value={mainResourceName}
-        onChange={e => onChange(e.target.value)}
-      >
-        {resources.map(resource => (
-          <MenuItem key={resource.fieldName} value={resource.fieldName}>
-            {resource.title}
-          </MenuItem>
-        ))}
-      </Select>
-    </div>
-  ),
-);
 
 export default class TimeTableTemplate extends React.PureComponent {
   constructor(props) {
@@ -127,27 +97,24 @@ export default class TimeTableTemplate extends React.PureComponent {
 
   render() {
     const { data, resources, mainResourceName } = this.state;
-
     return (
       <div className="timeTable-contents">
         
-        <ResourceSwitcher
+        {/* <ResourceSwitcher
           resources={resources}
           mainResourceName={mainResourceName}
           onChange={this.changeMainResource}
-        />
+        /> */}
 
         <Paper>
           <Scheduler
             data={data}
             height={600}
-            
-          >
-            
+            >
             <ViewState
               defaultCurrentDate="2018-06-27"
+              formatDate={renderDateCell}
             />
-
             <WeekView
               startDayHour={9}
               endDayHour={18}
@@ -166,9 +133,10 @@ export default class TimeTableTemplate extends React.PureComponent {
   }
 }
 function renderDateCell(cellData) {
+  console.log(dayOfWeekNames);
   return (
     <React.Fragment>
-      <div className="name">{dayOfWeekNames[cellData.date.getDay()]}</div>
+      <div className="name">{dayOfWeekNames}</div>
     </React.Fragment>
   );
 }
