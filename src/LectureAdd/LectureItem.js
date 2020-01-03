@@ -9,6 +9,7 @@ class LectureItem extends Component {
             lectureName,
             lectureSemester,
             lectureDate,
+            lectureLocation,
             professorName,
             lectureCode,
             lectureRemove,
@@ -22,6 +23,7 @@ class LectureItem extends Component {
                 <td>{lectureName}</td>
                 <td>{lectureSemester}</td>
                 <td>{lectureDate}</td>
+                <td>{lectureLocation}</td>
                 <td>{professorName}</td>
                 <td>
                 <LectureRemoveButton 

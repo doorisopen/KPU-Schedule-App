@@ -133,3 +133,9 @@ th {
 .timeTable-contents {
   margin: 0 auto;
 }
+.Cell-dayView-153 > p {
+  font-size: 1.3rem;
+}
+.Cell-dayOfMonth-150 {
+  display: none;
+}

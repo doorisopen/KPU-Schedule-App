@@ -14,6 +14,7 @@ class LectureList extends Component {
                 lectureName={lecture.Item.lectureName}
                 lectureSemester={lecture.Item.lectureSemester}
                 lectureDate={lecture.Item.lectureDate}
+                lectureLocation={lecture.Item.lectureLocation}
                 professorName={lecture.Item.professorName}
                 lectureCode={lecture.Item.lectureCode}
                 lectureRemove={lectureRemove}

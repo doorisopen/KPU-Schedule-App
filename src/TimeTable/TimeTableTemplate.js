@@ -10,79 +10,35 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui';
 import '../App.css';
 
-const dayOfWeekNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-const appointments = [{
-  title: 'Website Re-Design Plan',
-  startDate: new Date(2018, 5, 25, 12, 35),
-  endDate: new Date(2018, 5, 25, 15, 0),
-  id: 0,
-  members: [1, 3, 5],
-  location: 'Room 1',
-}, {
-  title: 'Book Flights to San Fran for Sales Trip',
-  startDate: new Date(2018, 5, 26, 9, 35),
-  endDate: new Date(2018, 5, 26, 10, 35),
-  id: 1,
-  members: [2, 4],
-  location: 'Room 2',
-}, {
-  title: 'Install New Router in Dev Room',
-  startDate: new Date(2018, 5, 27, 12, 35),
-  endDate: new Date(2018, 5, 27, 15, 0),
-  id: 2,
-  members: [3],
-  location: 'Room 3',
-}, {
-  title: 'Approve Personal Computer Upgrade Plan',
-  startDate: new Date(2018, 5, 28, 12, 35),
-  endDate: new Date(2018, 5, 28, 15, 0),
-  id: 3,
-  members: [4, 1],
-  location: 'Room 4',
-}, {
-  title: 'Final Budget Review',
-  startDate: new Date(2018, 5, 29, 12, 35),
-  endDate: new Date(2018, 5, 29, 15, 0),
-  id: 4,
-  members: [5, 1, 3],
-  location: 'Room 5',
-}, {
-  title: 'Hello React App',
-  startDate: new Date(2018, 5, 30, 12, 35),
-  endDate: new Date(2018, 5, 30, 15, 0),
-  id: 5,
-  members: [4, 1],
-  location: 'Room 1',
-}];
-
 export default class TimeTableTemplate extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      data: appointments,
-      mainResourceName: 'members',
+      data: [],
+      mainResourceName: 'location',
       resources: [
         {
           fieldName: 'location',
-          title: 'Location',
+          title: '강의실',
           instances: [
-            { id: 'Room 1', text: 'Room 1' },
-            { id: 'Room 2', text: 'Room 2' },
-            { id: 'Room 3', text: 'Room 3' },
-            { id: 'Room 4', text: 'Room 4' },
-            { id: 'Room 5', text: 'Room 5' },
+            { id: 'Room 1', text: "강의실"},
+            { id: 'Room 2', text: "강의실"},
+            { id: 'Room 3', text: "강의실"},
+            { id: 'Room 4', text: "강의실"},
+            { id: 'Room 5', text: "강의실"},
+            { id: 'Room 6', text: "강의실"},
+            { id: 'Room 7', text: "강의실"},
+            { id: 'Room 8', text: "강의실"},
+            { id: 'Room 9', text: "강의실"},
+            { id: 'Room 10', text: "강의실"}
           ],
         },
-        {
+        { // 교수이름
           fieldName: 'members',
-          title: 'Members',
-          allowMultiple: true,
+          title: '교수명',
+          allowMultiple: false,
           instances: [
-            { id: 1, text: 'Andrew Glover' },
-            { id: 2, text: 'Arnie Schwartz' },
-            { id: 3, text: 'John Heart' },
-            { id: 4, text: 'Taylor Riley' },
-            { id: 5, text: 'Brad Farkus' },
+            { id: 1, text: '교수명' }
           ],
         },
       ],
@@ -97,6 +53,74 @@ export default class TimeTableTemplate extends React.PureComponent {
 
   render() {
     const { data, resources, mainResourceName } = this.state;
+    const {
+      lectureItems,
+      isMakeTable
+    } = this.props;
+    const dayNum = {
+      "월": {id: 3},
+      "화": {id: 4},
+      "수": {id: 5},
+      "목": {id: 6},
+      "금": {id: 7},
+    }
+    if(isMakeTable) {
+      const appointment = [];
+      let dateLen, startTime1, endTime1, startTime2, endTime2;
+      let __day, __startHour, __endHour, __startMin, __endMin; 
+
+      for(let i = 0; i < lectureItems.length; i++) {
+        dateLen = lectureItems[i].Item.lectureDate.length;
+
+        if(dateLen < 40) {
+          __day = lectureItems[i].Item.lectureDate[0];
+          startTime1 = lectureItems[i].Item.lectureDate.split(']')[1].split('~')[0].trim();
+          __startHour = startTime1.split(":")[0];
+          __startMin = startTime1.split(":")[1];
+          endTime1 = lectureItems[i].Item.lectureDate.split(']')[1].split('~')[1].trim();
+          __endHour = endTime1.split(":")[0];
+          __endMin = endTime1.split(":")[1];
+        }
+
+        if(dateLen > 40) {
+          __day = lectureItems[i].Item.lectureDate[0];
+          startTime1 = lectureItems[i].Item.lectureDate.split(']')[1].split('~')[0].trim();
+          __startHour = startTime1.split(":")[0];
+          __startMin = startTime1.split(":")[1];
+          endTime1 = lectureItems[i].Item.lectureDate.split(']')[1].split('~')[1].substring(0,5).trim();
+          __endHour = endTime1.split(":")[0];
+          __endMin = endTime1.split(":")[1];
+          
+
+          startTime2 = lectureItems[i].Item.lectureDate.split(']')[2].split('~')[0].trim();
+          __startHour = startTime2.split(":")[0];
+          __startMin = startTime2.split(":")[1];
+          endTime2 = lectureItems[i].Item.lectureDate.split(']')[2].split('~')[1].trim();
+          __endHour = endTime2.split(":")[0];
+          __endMin = endTime2.split(":")[1];
+
+          // console.log(dateLen+": 1->"+startTime1+" "+endTime1);
+          // console.log(dateLen+": 2->"+startTime2+" "+endTime2);
+        }
+        appointment.push(
+          {
+            title: lectureItems[i].Item.lectureName,
+            startDate: new Date(2020, 1, dayNum[__day].id, __startHour, __startMin),
+            endDate: new Date(2020, 1, dayNum[__day].id, __endHour, __endMin),
+            id: 1,
+            members: 1,
+            location: 'Room '+(i+1)
+          }
+        );
+        // resources[0].instances[i].text = lectureItems[i].Item.lectureLocation;
+        // resources[1].instances[i].text = lectureItems[i].Item.professorName;
+      }
+      if(data.length === 0) {
+        this.setState({ data: appointment });
+        console.log(resources);
+      }
+    }
+                     
     return (
       <div className="timeTable-contents">
         
@@ -112,14 +136,15 @@ export default class TimeTableTemplate extends React.PureComponent {
             height={600}
             >
             <ViewState
-              defaultCurrentDate="2018-06-27"
-              formatDate={renderDateCell}
+              defaultCurrentDate="2020-02-08"
             />
             <WeekView
-              startDayHour={9}
-              endDayHour={18}
-            />
-
+              excludedDays={[0,6]}
+              startDayHour={8}
+              endDayHour={23.5}
+            >
+            </WeekView>
+            
             <Appointments />
             <AppointmentTooltip />
             <Resources
@@ -131,12 +156,4 @@ export default class TimeTableTemplate extends React.PureComponent {
       </div>
     );
   }
-}
-function renderDateCell(cellData) {
-  console.log(dayOfWeekNames);
-  return (
-    <React.Fragment>
-      <div className="name">{dayOfWeekNames}</div>
-    </React.Fragment>
-  );
 }

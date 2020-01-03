@@ -11,6 +11,7 @@ class Lecture extends Component {
             lectureName,
             lectureSemester,
             lectureDate,
+            lectureLocation,
             professorName,
             lectureCode,
             selected,
@@ -25,6 +26,7 @@ class Lecture extends Component {
             lectureName: lectureName,
             lectureSemester: lectureSemester,
             lectureDate: lectureDate,
+            lectureLocation: lectureLocation,
             professorName: professorName,
             lectureCode: lectureCode,
             selected: selected
@@ -37,6 +39,7 @@ class Lecture extends Component {
             <td>{lectureName}</td>
             <td>{lectureSemester}</td>
             <td>{lectureDate}</td>
+            <td>{lectureLocation}</td>
             <td>{professorName}</td>
             <td>
             <LectureAddButton

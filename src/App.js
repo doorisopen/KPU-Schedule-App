@@ -24,6 +24,7 @@ class App extends React.Component {
     btn2Color: false, 
     isLoading: true, // 데이터 로딩
     majorLectureLoading: false, // 전공 데이터 로딩
+    isMakeTable: false,
     lectures: [],       // 전공 별 데이터 (변동)
     lecturesSave: [],   // 초기 전체 데이터 (고정)
     lectureItems: []    // 강의 추가 데이터 (변동)
@@ -93,14 +94,14 @@ class App extends React.Component {
       this.setState({ btn2Disabled: true, btn2Color: true});
     }
   }
-  
 
   render() {
     // Get state
     const { 
       currentPage, 
       postsPerPage, 
-      isLoading, 
+      isLoading,
+      isMakeTable,
       lectures, 
       lecturesSave, 
       currentMajor, 
@@ -191,6 +192,7 @@ class App extends React.Component {
                           <th>강의명</th>
                           <th width="70">학기</th>
                           <th>강의시간</th>
+                          <th width="120">강의실</th>
                           <th width="120">교수이름</th>
                           <th width="120"></th>
                       </tr>
@@ -206,6 +208,7 @@ class App extends React.Component {
                           lectureYear={lecture.lectureYear} 
                           lectureSemester={lecture.lectureSemester}
                           lectureDate={lecture.lectureDate}
+                          lectureLocation={lecture.lectureLocation}
                           professorName={lecture.professorName}
                           lectureCode={lecture.lectureCode}
                           selected={lecture.selected}
@@ -233,18 +236,26 @@ class App extends React.Component {
                 </LectureAddTemplate>
                 <div>
                   <button onClick={(event) => {
-                    console.log("Make Schedule -->" + JSON.stringify(lectureItems) + " Count -->"+lectureItems.length);
+                    this.setState({isMakeTable: true});   
                   }}
                   >
-                  시간표 만들기
+                    시간표 만들기
                   </button>
                 </div>
               </div>
+              {isMakeTable ? (
               <div className="timeTable-container">
-                <TimeTableTemplate>
-
+                <TimeTableTemplate
+                  lectureItems = {lectureItems}
+                  isMakeTable = {isMakeTable}
+                >
                 </TimeTableTemplate>
               </div>
+              ) : ( 
+              <div className="timeTable-container">
+                NULL
+              </div>
+              )}
           </section>
         <footer className="lecture-page-footer">
           github. https://github.com/doorisopen
