@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 
 const Pagination = ({ currentPage, postsPerPage, totalPosts, paginate }) => {
     
@@ -16,8 +17,8 @@ const Pagination = ({ currentPage, postsPerPage, totalPosts, paginate }) => {
                     if(currentPage === 1) return;
                     currentPage = currentPage - 1;
                     paginate(currentPage);
-                }} className="page-btn">
-                    이전페이지
+                }} className="button-design-small">
+                    &lt;
                 </button>
             </li>
             <li className="page-item">
@@ -28,8 +29,8 @@ const Pagination = ({ currentPage, postsPerPage, totalPosts, paginate }) => {
                     if(currentPage === totalPage.length) return;
                     currentPage = currentPage + 1;
                     paginate(currentPage);
-                }} className="page-btn">
-                    다음페이지
+                }} className="button-design-small">
+                    &gt;
                 </button>
             </li>
         </ul>

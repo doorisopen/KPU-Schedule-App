@@ -94,6 +94,11 @@ class App extends React.Component {
       this.setState({ btn2Disabled: true, btn2Color: true});
     }
   }
+  onMakeTimeTableButton(event) {
+    if (event.target.onclick) {
+      this.setState({isMakeTable: true});   
+    }
+  }
 
   render() {
     // Get state
@@ -116,8 +121,8 @@ class App extends React.Component {
     // Change Page
     const paginate = (pageNumber) => this.setState({ currentPage: pageNumber });
     // Chage btn Color
-    const btn1Selected = this.state.btn1Color ? "red" : "black";
-    const btn2Selected = this.state.btn2Color ? "red" : "black";
+    const btn1Selected = this.state.btn1Color ? "#29b6f6" : "black";
+    const btn2Selected = this.state.btn2Color ? "#29b6f6" : "black";
     
     // Change Major
     const changeMajor = (majorCode) => {
@@ -167,7 +172,7 @@ class App extends React.Component {
                           this.setState({ lectures: [], currentPage: 1, gubun: "A.json", isLoading: true});
                           this.onChangeButton1(event);
                         }}
-                        style={{color: btn1Selected}}
+                        style={{borderColor: btn1Selected}}
                         disabled={this.state.btn1Disabled}
                       >
                           학부(대학교)
@@ -176,7 +181,7 @@ class App extends React.Component {
                           this.setState({ lectures: [], currentPage: 1, gubun: "G.json", isLoading: true});
                           this.onChangeButton2(event);
                         }}
-                        style={{color: btn2Selected}}
+                        style={{borderColor: btn2Selected}}
                         disabled={this.state.btn2Disabled}
                       >
                         석사(대학원)
@@ -234,9 +239,9 @@ class App extends React.Component {
                     currentLectures={currentLectures}
                   />
                 </LectureAddTemplate>
-                <div>
-                  <button onClick={(event) => {
-                    this.setState({isMakeTable: true});   
+                <div className="div-makeTimeTable">
+                  <button className="button-design" onClick={(event) => {
+                    this.onMakeTimeTableButton(event);
                   }}
                   >
                     시간표 만들기
@@ -253,7 +258,6 @@ class App extends React.Component {
               </div>
               ) : ( 
               <div className="timeTable-container">
-                NULL
               </div>
               )}
           </section>

@@ -62,7 +62,7 @@ const Major = ({ lectures, changeMajor }) => {
     // console.log(majorLectures);
 
     return (
-        <select onChange={(event) => {
+        <select className="maj-selector" onChange={(event) => {
                 changeMajor(event.target.value);
             }}>
             {majors.map(major => (

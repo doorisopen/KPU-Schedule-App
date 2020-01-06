@@ -3,7 +3,7 @@ import React from "react";
 const LectureAddButton = ({currentLectures, lectureItem, lectureAdd}) => {
 
     return (
-        <button onClick={(event) => {
+        <button className="button-design-small" onClick={(event) => {
             // 선택된 데이터의 Index 찾는다.
             const index = currentLectures.findIndex(lecture => 
                 lecture.lectureIdx === lectureItem.Item.lectureIdx);

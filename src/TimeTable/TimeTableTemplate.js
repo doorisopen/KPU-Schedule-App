@@ -10,7 +10,7 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui';
 import '../App.css';
 
-export default class TimeTableTemplate extends React.PureComponent {
+export default class TimeTableTemplate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -84,6 +84,7 @@ export default class TimeTableTemplate extends React.PureComponent {
 
         if(dateLen > 40) {
           __day = lectureItems[i].Item.lectureDate[0];
+
           startTime1 = lectureItems[i].Item.lectureDate.split(']')[1].split('~')[0].trim();
           __startHour = startTime1.split(":")[0];
           __startMin = startTime1.split(":")[1];
@@ -91,7 +92,18 @@ export default class TimeTableTemplate extends React.PureComponent {
           __endHour = endTime1.split(":")[0];
           __endMin = endTime1.split(":")[1];
           
-
+          appointment.push(
+            {
+              title: lectureItems[i].Item.lectureName,
+              startDate: new Date(2020, 1, dayNum[__day].id, __startHour, __startMin),
+              endDate: new Date(2020, 1, dayNum[__day].id, __endHour, __endMin),
+              id: 1,
+              members: 1,
+              location: 'Room '+(i+1)
+            }
+          );
+          
+          __day = lectureItems[i].Item.lectureDate.split(']')[1].split('~')[1].substring(5,7).trim();
           startTime2 = lectureItems[i].Item.lectureDate.split(']')[2].split('~')[0].trim();
           __startHour = startTime2.split(":")[0];
           __startMin = startTime2.split(":")[1];
@@ -117,7 +129,6 @@ export default class TimeTableTemplate extends React.PureComponent {
       }
       if(data.length === 0) {
         this.setState({ data: appointment });
-        console.log(resources);
       }
     }
                      
