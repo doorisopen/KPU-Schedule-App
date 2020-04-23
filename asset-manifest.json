@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/kpu-schedule-app/static/css/main.91229610.chunk.css",
-    "main.js": "/kpu-schedule-app/static/js/main.2ae84e8b.chunk.js",
-    "main.js.map": "/kpu-schedule-app/static/js/main.2ae84e8b.chunk.js.map",
+    "main.js": "/kpu-schedule-app/static/js/main.dd3ba018.chunk.js",
+    "main.js.map": "/kpu-schedule-app/static/js/main.dd3ba018.chunk.js.map",
     "runtime-main.js": "/kpu-schedule-app/static/js/runtime-main.07e9b993.js",
     "runtime-main.js.map": "/kpu-schedule-app/static/js/runtime-main.07e9b993.js.map",
-    "static/js/2.a268b614.chunk.js": "/kpu-schedule-app/static/js/2.a268b614.chunk.js",
-    "static/js/2.a268b614.chunk.js.map": "/kpu-schedule-app/static/js/2.a268b614.chunk.js.map",
+    "static/js/2.8a4ed216.chunk.js": "/kpu-schedule-app/static/js/2.8a4ed216.chunk.js",
+    "static/js/2.8a4ed216.chunk.js.map": "/kpu-schedule-app/static/js/2.8a4ed216.chunk.js.map",
     "index.html": "/kpu-schedule-app/index.html",
-    "precache-manifest.a1d87bdf74dd4f754dfde9c6d785bee6.js": "/kpu-schedule-app/precache-manifest.a1d87bdf74dd4f754dfde9c6d785bee6.js",
+    "precache-manifest.730becf6472373fd9c2a36e29939bd4d.js": "/kpu-schedule-app/precache-manifest.730becf6472373fd9c2a36e29939bd4d.js",
     "service-worker.js": "/kpu-schedule-app/service-worker.js",
     "static/css/main.91229610.chunk.css.map": "/kpu-schedule-app/static/css/main.91229610.chunk.css.map",
-    "static/js/2.a268b614.chunk.js.LICENSE": "/kpu-schedule-app/static/js/2.a268b614.chunk.js.LICENSE"
+    "static/js/2.8a4ed216.chunk.js.LICENSE": "/kpu-schedule-app/static/js/2.8a4ed216.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.07e9b993.js",
-    "static/js/2.a268b614.chunk.js",
+    "static/js/2.8a4ed216.chunk.js",
     "static/css/main.91229610.chunk.css",
-    "static/js/main.2ae84e8b.chunk.js"
+    "static/js/main.dd3ba018.chunk.js"
   ]
 }

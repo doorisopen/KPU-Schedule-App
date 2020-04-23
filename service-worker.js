@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/kpu-schedule-app/precache-manifest.a1d87bdf74dd4f754dfde9c6d785bee6.js"
+  "/kpu-schedule-app/precache-manifest.730becf6472373fd9c2a36e29939bd4d.js"
 );
 
 self.addEventListener('message', (event) => {
